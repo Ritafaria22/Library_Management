@@ -69,7 +69,7 @@ def register(request):
             user = form.save()
             UserProfile.objects.create(user=user)
             login(request, user)
-            return redirect('book_list')
+            return redirect('home')
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
