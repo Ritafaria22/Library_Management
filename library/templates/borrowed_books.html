@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Borrowed Books</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Borrowed Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for borrowed_book in borrowed_books %}
+        <tr>
+            <td>{{ borrowed_book.book.title }}</td>
+            <td>{{ borrowed_book.borrowed_date }}</td>
+            <td>
+                {% if not borrowed_book.returned %}
+                    <form action="{% url 'return_book' borrowed_book.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Return</button>
+                    </form>
+                {% else %}
+                    Returned
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

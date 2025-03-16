@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="d-flex flex-wrap px-5 pt-3 align-items-center">
+    <div class="col-6">
+        <h1>Welcome to the Library</h1>
+        <p>Explore a variety of books, register, and borrow your favorites.</p>
+    </div>
+</div>
+
+
+<div class="d-flex flex-wrap p-4">
+    <div class="col-2 bg-white p-3">
+        <h5>All Categories</h5>
+
+        {% for cat in category %}
+
+        <div class="form-check">
+            <input 
+            class="form-check-input" 
+            type="radio" 
+            name="category"
+             id="{{ cat.id }}" />
+
+            <label class="form-check-label" for="{{ cat.id }}">
+                <a href="{% url 'category_books' cat.slug %}" class="text-decoration-none text-dark">{{ cat.name }}</a>
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="col-10 p-3">
+        <h4>{{ data|length }} Books Available</h4>
+        <div class="d-flex flex-wrap pt-5">
+            {% for book in data %}
+            <div class="col-sm-3">
+                <div class="card mx-2">
+                    <div class="card-body">
+                        <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">
+                        <h5 class="card-title">
+                            <a href="{% url 'book_detail' book.id %}" class="text-decoration-none text-dark">{{ book.title }}</a>
+                        </h5>
+                        <p class="card-text">{{ book.description|truncatewords:10 }}</p>
+                        <p>Price: ₹{{ book.borrowing_price }}</p>
+                       
+                        <a href="{% url 'book_detail' book.id %}" class="btn btn-secondary">Details</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No books available in this category.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

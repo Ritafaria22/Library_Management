@@ -1,0 +1,22 @@
+<!-- insufficient_balance.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insufficient Balance</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Insufficient Balance!</h4>
+            <p>We're sorry, but you do not have enough balance to borrow this book.</p>
+            <hr>
+            <p class="mb-0">Please check your balance or try borrowing a different book.</p>
+        </div>
+        <a href="{% url 'profile' %}" class="btn btn-primary">Go to Profile</a>
+        <a href="{% url 'book_list' %}" class="btn btn-secondary">Back to Book List</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Books</title>
+</head>
+<body>
+    <h2>Available Books</h2>
+    <a href="{% url 'logout' %}">Logout</a>
+
+    <h3> Categories</h3>
+    <ul>
+        <li><a href="{% url 'book_list' %}">All Books</a></li>  <!-- Show all books -->
+        {% for cat in categories %}
+        <li>
+            <a href="{% url 'category_books' cat.slug %}" 
+               {% if selected_category == cat.slug %}style="font-weight:bold;"{% endif %}>
+               {{ cat.name }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <table border="1">
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td><img src="{{ book.image.url }}" width="100"></td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.description }}</td>
+            <td>{{ book.borrowing_price }}</td>
+            <td>
+                <a href="{% url 'borrow_book' book.id %}">Borrow</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2>Account Balance</h2>
+        <p>Your current balance is: <strong>${{ balance }}</strong></p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+{% endblock %}
