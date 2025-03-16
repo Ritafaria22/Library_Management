@@ -19,12 +19,12 @@ environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+SECRET_KEY = env("SECRET_KEY")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*6hv-@s--0p$-)*5b$ck!b8md&ofp3$#+cij_!(^1618l3q%57'
+# SECRET_KEY = 'django-insecure-*6hv-@s--0p$-)*5b$ck!b8md&ofp3$#+cij_!(^1618l3q%57'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,13 +90,27 @@ WSGI_APPLICATION = 'Library_management.wsgi.application'
 #     }
 # }
 
+
+
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://swissbank_user:FiqI3umzGGTpRsqBAbhgypVg3OkFQpRt@dpg-cv878ttumphs738be5i0-a.oregon-postgres.render.com/swissbank',
-        
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env("DB_NAME"),
+        'USER': env("DB_USER"),
+        'PASSWORD': env("DB_PASSWORD"),
+        'HOST': env("DB_HOST"),
+        'PORT': env("DB_PORT"),
+    }
 }
+
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default='postgresql://swissbank_user:FiqI3umzGGTpRsqBAbhgypVg3OkFQpRt@dpg-cv878ttumphs738be5i0-a.oregon-postgres.render.com/swissbank',
+        
+#     )
+# }
 
 
 
