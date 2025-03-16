@@ -4,7 +4,7 @@ from .views import DepositMoneyView
 
 urlpatterns = [
     path('register/', views.register, name='register'),
-    
+    path('profile/', views.profile, name='profile'),
     path('login/', views.user_login, name='login'),
     path('deposit/', DepositMoneyView.as_view(), name='deposit_money'),
     path('history/', views.borrowing_history, name='borrowing_history'),

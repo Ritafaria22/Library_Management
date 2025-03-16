@@ -23,13 +23,13 @@ from django.http import HttpResponse
 
 # Function to send confirmation email
 def send_confirmation_email(user_email, amount, balance):
-    """Send a deposit confirmation email."""
     subject = 'Deposit Confirmation'
     template = "deposit_email.html"
     
     message = render_to_string(template, {
         'amount': amount,
         'balance': balance,
+        'user_email': user_email.split('@')[0],
     })
 
     email = EmailMultiAlternatives(subject, '',  settings.EMAIL_HOST_USER, [user_email])
@@ -74,10 +74,10 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
 
-# @login_required            
-# def profile(request):
-#     data= Books.objects.filter(author=request.user)
-#     return render(request, 'profile.html', {'data': data})
+@login_required            
+def profile(request):
+    data= Books.objects.filter(author=request.user)
+    return render(request, 'profile.html', {'data': data})
 
 
 def user_login(request):
